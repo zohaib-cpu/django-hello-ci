@@ -25,9 +25,9 @@ jobs:
           pip install django
 
       - name: Run Django checks
-        run: |
-          python manage.py check
+        run: python manage.py check
+        working-directory: ./   
 
       - name: Run Tests
-        run: |
-          python manage.py test || echo "No tests found, skipping"
+        run: python manage.py test || echo "No tests found, skipping"
+        working-directory: ./  
