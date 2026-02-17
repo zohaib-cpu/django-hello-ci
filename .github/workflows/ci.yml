@@ -24,11 +24,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install django
 
-            - name: Run Django checks
+      - name: Run Django checks
         run: python manage.py check
-        working-directory: ./hello_world  
+        working-directory: ./hello_world   
 
       - name: Run Tests
         run: python manage.py test || echo "No tests found, skipping"
         working-directory: ./hello_world
-
