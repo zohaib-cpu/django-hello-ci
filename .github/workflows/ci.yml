@@ -33,7 +33,8 @@ jobs:
         working-directory: ./hello_world
 
       - name: Install Heroku CLI
-        uses: akhileshns/heroku-cli-action@v1.4.6
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
 
       - name: Deploy to Heroku
         env:
@@ -41,5 +42,6 @@ jobs:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
         run: |
-          heroku git:remote -a $HEROKU_APP_NAME
+          heroku auth:token
+          git remote add heroku https://git.heroku.com/$HEROKU_APP_NAME.git || true
           git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:main
